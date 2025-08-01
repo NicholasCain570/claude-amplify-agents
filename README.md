@@ -8,7 +8,21 @@
 
 A comprehensive collection of specialized AI subagents for Claude Code, designed specifically for AWS Amplify applications with React frontend, GraphQL API, DynamoDB, S3 storage, and Chrome extension integration.
 
-## 🚀 Overview
+## 🚀 Quick Start
+
+Get up and running in 30 seconds:
+
+```bash
+# 1. Install agents (one command)
+curl -sSL https://raw.githubusercontent.com/NicholasCain570/claude-amplify-agents/main/setup-agents.sh | bash
+
+# 2. Start coding with AI assistance
+claude code
+> "Build a user authentication system with social login"
+# → Automatically coordinates: amplify-auth → amplify-schema → react-developer
+```
+
+**That's it!** Your AI development team is ready. 🎉
 
 Transform your development workflow with a complete AI-powered development team. These subagents provide specialized expertise for every aspect of modern full-stack development, from frontend React components to backend Amplify services, comprehensive testing with Playwright, and Chrome extension development.
 
@@ -77,12 +91,45 @@ This subagent collection is designed for applications with the following stack:
 
 ## 🛠️ Installation
 
-### Quick Setup
+### ⚡ Quick Setup (Recommended)
 ```bash
-# Clone this repository
-git clone https://github.com/NicholasCain570/claude-amplify-agents.git
+# One-line installation - downloads and installs automatically
+curl -sSL https://raw.githubusercontent.com/NicholasCain570/claude-amplify-agents/main/setup-agents.sh | bash
+```
 
-# Copy agents to your project
+### 🎯 Advanced Installation Options
+
+#### Project Level (Recommended for Teams)
+```bash
+# Install to current project only (.claude/agents/)
+curl -sSL https://raw.githubusercontent.com/NicholasCain570/claude-amplify-agents/main/setup-agents.sh | bash -s -- --project
+```
+
+#### User Level (Available Across All Projects)
+```bash
+# Install to user directory (~/.claude/agents/)
+curl -sSL https://raw.githubusercontent.com/NicholasCain570/claude-amplify-agents/main/setup-agents.sh | bash -s -- --user
+```
+
+#### Both Levels (Maximum Flexibility)
+```bash
+# Install to both project and user levels
+curl -sSL https://raw.githubusercontent.com/NicholasCain570/claude-amplify-agents/main/setup-agents.sh | bash -s -- --both
+```
+
+### 📁 Git Clone Method
+```bash
+# Clone repository and run interactive setup
+git clone https://github.com/NicholasCain570/claude-amplify-agents.git
+cd claude-amplify-agents
+chmod +x setup-agents.sh
+./setup-agents.sh
+```
+
+### 🔧 Manual Installation
+```bash
+# For users who prefer manual control
+git clone https://github.com/NicholasCain570/claude-amplify-agents.git
 cd your-amplify-project
 mkdir -p .claude/agents
 cp claude-amplify-agents/*.md .claude/agents/
@@ -91,16 +138,61 @@ cp claude-amplify-agents/*.md .claude/agents/
 claude code /agents
 ```
 
-### Automated Setup
+### ✅ Verify Installation
 ```bash
-# Download and run the setup script
+# Check that agents are loaded
+claude code /agents
+
+# Test an agent
+claude code
+> "Use the react-developer subagent to explain React hooks"
+```
+
+## 🔧 Installation Script Features
+
+Our `setup-agents.sh` script provides:
+- **🚀 One-command installation** - Get started in seconds
+- **🎯 Flexible deployment** - Project, user, or both levels
+- **🛡️ Error handling** - Graceful failure recovery
+- **📊 Progress feedback** - Visual installation progress
+- **✅ Verification** - Confirms successful installation
+- **🧹 Auto-cleanup** - Removes temporary files
+- **📱 Cross-platform** - Works on macOS, Linux, and WSL
+
+## 📍 Installation Levels Explained
+
+| Level | Location | Best For | Team Sharing |
+|-------|----------|----------|--------------|
+| **Project** | `.claude/agents/` | Team projects, version control | ✅ Shared |
+| **User** | `~/.claude/agents/` | Personal workflow, cross-project | ❌ Individual |
+| **Both** | Both locations | Maximum flexibility | ⚡ Hybrid |
+
+**Recommendation**: Use **project level** for team consistency and version control.
+
+## 🔄 Updating Agents
+
+Keep your agents up-to-date with the latest improvements:
+
+### Automatic Update
+```bash
+# Re-run the setup script to get latest versions
 curl -sSL https://raw.githubusercontent.com/NicholasCain570/claude-amplify-agents/main/setup-agents.sh | bash
 ```
 
-### Manual Installation
-1. Create the agents directory: `mkdir -p .claude/agents`
-2. Copy all `.md` files from this repository to `.claude/agents/`
-3. Restart Claude Code to load the new agents
+### Manual Update
+```bash
+# Pull latest changes
+cd claude-amplify-agents
+git pull origin main
+
+# Copy updated agents
+cp *.md /path/to/your/project/.claude/agents/
+```
+
+### Check for Updates
+- Watch this repository for release notifications
+- Follow [releases page](https://github.com/NicholasCain570/claude-amplify-agents/releases) for changelog
+- Star ⭐ the repository to get notified of major updates
 
 ## 🎯 Usage Examples
 
@@ -245,22 +337,66 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 ## 🐛 Troubleshooting
 
-### Agents Not Appearing
+### Installation Issues
+
+#### Script Won't Download
 ```bash
-# Check agent directory
+# Check internet connection
+ping github.com
+
+# Try alternative download method
+wget https://raw.githubusercontent.com/NicholasCain570/claude-amplify-agents/main/setup-agents.sh
+chmod +x setup-agents.sh
+./setup-agents.sh
+```
+
+#### Permission Denied
+```bash
+# Make script executable
+chmod +x setup-agents.sh
+
+# Run with explicit bash
+bash setup-agents.sh
+```
+
+#### Agents Not Appearing
+```bash
+# Check agent directory exists
 ls -la .claude/agents/
 
 # Verify Claude Code can see agents
 claude code /agents
 
+# Check file permissions
+chmod 644 .claude/agents/*.md
+
 # Restart Claude Code
 claude code --restart
 ```
 
-### Agent Not Being Selected
+### Agent Selection Issues
+
+#### Agent Not Being Selected Automatically
 - Add more specific keywords to agent descriptions
 - Use explicit agent calls: `"Use the amplify-schema subagent to..."`
-- Check for conflicting agent names
+- Check for conflicting agent names between user and project levels
+
+#### Need to Force Specific Agent
+```bash
+# Explicit agent usage
+> "Use the security-auditor subagent to review my authentication code"
+> "Have the playwright-tester subagent create login flow tests"
+```
+
+### Performance Issues
+
+#### Too Many Agents Loading
+- Remove unused agents: `rm .claude/agents/unwanted-agent.md`
+- Use project-level agents only for team consistency
+
+#### Agent Responses Too Generic
+- Customize agent system prompts for your specific project needs
+- Add project-specific context to agent descriptions
 
 ## 📜 License
 
@@ -274,10 +410,23 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 ## 🔗 Related Resources
 
-- [Claude Code Documentation](https://docs.anthropic.com/en/docs/claude-code)
-- [AWS Amplify Documentation](https://docs.amplify.aws/)
-- [Playwright Testing Framework](https://playwright.dev/)
-- [Chrome Extension Development](https://developer.chrome.com/docs/extensions/)
+- [Claude Code Documentation](https://docs.anthropic.com/en/docs/claude-code) - Official Claude Code guide
+- [AWS Amplify Documentation](https://docs.amplify.aws/) - Complete Amplify reference
+- [Playwright Testing Framework](https://playwright.dev/) - End-to-end testing documentation
+- [Chrome Extension Development](https://developer.chrome.com/docs/extensions/) - Extension API reference
+- [GraphQL Best Practices](https://graphql.org/learn/best-practices/) - GraphQL optimization guide
+
+## 📞 Support
+
+- 🐛 **Bug Reports**: [Open an issue](https://github.com/NicholasCain570/claude-amplify-agents/issues)
+- 💡 **Feature Requests**: [Discussions](https://github.com/NicholasCain570/claude-amplify-agents/discussions)
+- 📖 **Documentation**: Check our [Wiki](https://github.com/NicholasCain570/claude-amplify-agents/wiki)
+- 🤝 **Contributing**: See [CONTRIBUTING.md](CONTRIBUTING.md)
+
+## 🏷️ Version History
+
+- **v1.0.0** - Initial release with 24 specialized agents
+- Latest updates available on the [releases page](https://github.com/NicholasCain570/claude-amplify-agents/releases)
 
 ---
 
