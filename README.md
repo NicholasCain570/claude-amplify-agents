@@ -80,7 +80,7 @@ This subagent collection is designed for applications with the following stack:
 ### Quick Setup
 ```bash
 # Clone this repository
-git clone https://github.com/yourusername/claude-amplify-agents.git
+git clone https://github.com/NicholasCain570/claude-amplify-agents.git
 
 # Copy agents to your project
 cd your-amplify-project
@@ -94,7 +94,7 @@ claude code /agents
 ### Automated Setup
 ```bash
 # Download and run the setup script
-curl -sSL https://raw.githubusercontent.com/yourusername/claude-amplify-agents/main/setup-agents.sh | bash
+curl -sSL https://raw.githubusercontent.com/NicholasCain570/claude-amplify-agents/main/setup-agents.sh | bash
 ```
 
 ### Manual Installation
